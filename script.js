@@ -24,7 +24,7 @@ let appData = {
         for (let i = 0; i < 2; i++) {
             let question = prompt("Введите обязательную статью расходов в этом месяце", 'ЖКХ'),
                 answer = prompt("Во сколько обойдется?", '');
-            if (typeof (question) === 'string' && typeof (question) != null && typeof (answer) != null && question != '' && answer != '' & question.length < 50) {
+            if (typeof (question) === 'string' && typeof (question) != null && typeof (answer) != null && question != '' && answer != '' && question.length < 50) {
                 appData.expenses[question] = answer;
             } else {
                 i--;
@@ -54,13 +54,28 @@ let appData = {
         }
     },
     chooseOptExpenses: function () {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 1; i < 3; i++) {
             let answer = prompt("Статья необязательных расходов?");
 
             if (typeof (answer) === 'string' && answer.length < 50) {
-                let a = i + 1;
-                appData.optionalExpenses[a] = answer;
+                appData.optionalExpenses[i] = answer;
             }
         }
     },
+    chooseIncome: function () {
+        let items = prompt("Что принесет дополнительный доход? (перечислите через запятую)", "Рыбалка, гуси, создание сайтов");
+        if (typeof (items) === 'string' && typeof (items) != null && items != '' && items.length < 50) {
+            appData.income = items.split(', ');
+            appData.income.forEach((item, i) => {
+                console.log("Способы доп заработка");
+                console.log(i + 1, item);
+            });
+        }
+
+    },
 };
+
+console.log("Наша программа включает в себя данные: ");
+for (let key in appData) {
+    console.log("Свойство: " + key + " содержит " + appData[key]);
+}
