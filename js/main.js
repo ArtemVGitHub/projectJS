@@ -28,6 +28,22 @@ let money, time;
 
 
 startBtn.addEventListener('click', function () {
+
+
+	expensesItemBtn.removeAttribute('disabled');
+	for (let i = 0; i < expensesItemInputs.length; i++) {
+		expensesItemInputs[i].removeAttribute('disabled');
+	}
+	optionalExpensesBtn.removeAttribute('disabled');
+	for (let i = 0; i < optionalExpensesInputs.length; i++) {
+		optionalExpensesInputs[i].removeAttribute('disabled');
+	}
+	chooseIncomeInput.removeAttribute('disabled');
+	savings.removeAttribute('disabled');
+	sumSavings.removeAttribute('disabled');
+	percentSavings.removeAttribute('disabled');
+
+
 	time = prompt("Введиет дату в формате YYYY-MM-DD", "2020-02-02");
 	money = +prompt("Ваш бюджет на месяц", "50000");
 
@@ -71,10 +87,11 @@ optionalExpensesBtn.addEventListener('click', () => {
 	}
 });
 
+
 countBudgetBtn.addEventListener('click', () => {
 
 	if (appData.budget != undefined) {
-		appData.moneyPerDay = (appData.budget / 30).toFixed();
+		appData.moneyPerDay = ((appData.budget - +expensesValue.textContent) / 30).toFixed();
 		daybudgetValue.textContent = +appData.moneyPerDay;
 
 		if (appData.moneyPerDay < 100) {
